@@ -1,8 +1,8 @@
 import Head from 'next/head'
 
-const title = 'Synethsizer'
-const url = 'https://synethsizer.com/'
-const description = 'A mesmerizing 3D interactive harmonic oscillating visual synthesizer'
+const title = 'ProVision'
+// const url = 'https://synethsizer.com/'
+const description = 'A web based protein visualization tool'
 const author = 'forestheims'
 
 export default function Header() {
@@ -31,7 +31,7 @@ export default function Header() {
       <meta property='og:title' content={title} />
       <meta property='og:type' content='site' />
       <meta property='og:author' content={author} />
-      <meta property='og:url' content={url} />
+      {/* <meta property='og:url' content={url} /> */}
       <meta property='og:image' content={'/img/synethsizer_front.PNG'} />
       <meta property='og:site_name' content={title} />
       <meta property='og:description' content={description} />

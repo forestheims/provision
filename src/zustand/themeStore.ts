@@ -2,6 +2,8 @@ import { create } from 'zustand'
 
 interface ThemeState {
   color: string
+  PDB: string
+  PDBdata: string
   multiplier: number
   inverseSpeed: number
   forward: boolean
@@ -14,12 +16,16 @@ interface ThemeState {
   setPlaying: (current: boolean) => void
   setForward: (current: boolean) => void
   setColor: (selection: string) => void
+  setPDB: (selection: string) => void
+  setPDBdata: (selection: string) => void
   setMultiplier: (current: number) => void
   setInverseSpeed: (current: number) => void
 }
 
 export const useThemeStore = create<ThemeState>()((set) => ({
   color: 'Rainbow',
+  PDB: '',
+  PDBdata: '',
   multiplier: 91,
   inverseSpeed: 26,
   forward: true,
@@ -33,7 +39,8 @@ export const useThemeStore = create<ThemeState>()((set) => ({
   setNum: (to) => set((state) => ({ num: to })),
   setPlaying: (current) => set(() => ({ playing: current })),
   setForward: (current) => set(() => ({ forward: current })),
-  setColor: (selection) => set(() => ({ color: selection })),
+  setPDB: (selection) => set(() => ({ PDB: selection })),
+  setPDBdata: (selection) => set(() => ({ PDBdata: selection })),
   setMultiplier: (current) => set(() => ({ multiplier: current })),
   setInverseSpeed: (current) => set(() => ({ inverseSpeed: current })),
 }))
