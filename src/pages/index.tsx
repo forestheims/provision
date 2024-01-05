@@ -1,4 +1,5 @@
 import AudioControls from '@/components/dom/AudioControls';
+import { mungePDBdata } from '@/utils/mungePDB';
 import { useThemeStore } from '@/zustand/themeStore';
 import dynamic from 'next/dynamic';
 
@@ -46,6 +47,13 @@ export default function Page(props) {
     setPlaying(true);
   }
 
+  const clear = () => {
+    const inputS = document.getElementById("PDB");
+    inputS.innerText = "";
+    setPDB("");
+    setPDBdata(null);
+  }
+
   const pdbHandler = (e) => {
     setPDB(e.target.value);
   }
@@ -86,7 +94,9 @@ export default function Page(props) {
         });
       })
       .then(text => {
-        setPDBdata(text);
+        const protein = mungePDBdata(text);
+        // console.log(protein);
+        setPDBdata(protein);
       })
       .catch(err => console.error(err));
   }
@@ -128,6 +138,7 @@ export default function Page(props) {
         <div className='flex gap-1'>
           <input onChange={(e) => pdbHandler(e)} className='rounded bg-purple-400 p-1 pl-3 hover:bg-purple-300 text-black placeholder-black' placeholder='PDB identifier' name="PDB" id="PDB" />
           <button className='rounded bg-lime-700 pl-2 pr-2 ml-2 hover:bg-lime-600' onClick={() => pdbSearchHandler()}>Search</button>
+          <button className='rounded bg-orange-700 pl-2 pr-2 ml-2 hover:bg-orange-600' onClick={() => clear()}>Clear</button>
         </div>
         <div className='flex gap-1'>
           {/* <h2>
@@ -163,7 +174,7 @@ export default function Page(props) {
 
 // Canvas components go here
 // It will receive same props as the Page component (from getStaticProps, etc.)
-Page.canvas = (props) => <Dots />
+Page.canvas = (props) => <Dots />;
 
 export async function getStaticProps() {
   return { props: { title: 'Index' } }

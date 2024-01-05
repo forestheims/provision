@@ -1,9 +1,10 @@
 import { create } from 'zustand'
+import { GameObject } from '@/utils/mungePDB'
 
 interface ThemeState {
   color: string
   PDB: string
-  PDBdata: string
+  PDBdata: GameObject
   multiplier: number
   inverseSpeed: number
   forward: boolean
@@ -17,7 +18,7 @@ interface ThemeState {
   setForward: (current: boolean) => void
   setColor: (selection: string) => void
   setPDB: (selection: string) => void
-  setPDBdata: (selection: string) => void
+  setPDBdata: (selection: GameObject) => void
   setMultiplier: (current: number) => void
   setInverseSpeed: (current: number) => void
 }
@@ -25,7 +26,7 @@ interface ThemeState {
 export const useThemeStore = create<ThemeState>()((set) => ({
   color: 'Rainbow',
   PDB: '',
-  PDBdata: '',
+  PDBdata: null,
   multiplier: 91,
   inverseSpeed: 26,
   forward: true,
@@ -40,6 +41,7 @@ export const useThemeStore = create<ThemeState>()((set) => ({
   setPlaying: (current) => set(() => ({ playing: current })),
   setForward: (current) => set(() => ({ forward: current })),
   setPDB: (selection) => set(() => ({ PDB: selection })),
+  setColor: (selection) => set(() => ({ color: selection })),
   setPDBdata: (selection) => set(() => ({ PDBdata: selection })),
   setMultiplier: (current) => set(() => ({ multiplier: current })),
   setInverseSpeed: (current) => set(() => ({ inverseSpeed: current })),
